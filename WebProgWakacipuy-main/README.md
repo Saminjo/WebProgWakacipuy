@@ -1,2 +1,0 @@
-# WebProgWakacipuy <br>
-HAI
