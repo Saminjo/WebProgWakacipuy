@@ -1,11 +1,7 @@
-@extends('footer')
-
-@extends('master')
-@section('title','View Item')
-
+@extends('layouts.master')
+@section('title','Home')
 
 @section('content')
-
     <table class="table table-dark table-striped mt-3 mb-3">
         <thead>
         <tr>
@@ -57,7 +53,4 @@
         </tr>
         </tbody>
     </table>
-
-@stop
-
-@extends('header')
+@endsection

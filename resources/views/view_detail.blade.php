@@ -1,13 +1,7 @@
-@extends('footer')
-
-@extends('master')
-@section('title')
-    View Product Detail
-@stop
-
+@extends('layouts.master')
+@section('title','Home')
 
 @section('content')
-
     <div class="card mx-auto mt-3 mb-3" style="max-width: 990px;">
         <div class="row g-0">
             <div class="col-md-4">
@@ -23,7 +17,4 @@
             </div>
         </div>
     </div>
-
-@stop
-
-@extends('header')
+@endsection

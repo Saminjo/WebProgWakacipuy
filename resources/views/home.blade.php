@@ -1,34 +1,45 @@
-@extends('footer')
-
-<style>
-    .setheigh{
-        min-height: 30vh;
-    }
-
-    .border{
-        border-style: dotted;
-    }
-</style>
-
-@extends('master')
+@extends('layouts.master')
 @section('title','Home')
 
 @section('content')
-    <div class="card bg-dark text-white">
-        <img src="https://c1.wallpaperflare.com/preview/173/122/573/trash-empty-recycle-recycling.jpg" class="card-img" alt="">
-        <div class="card-img-overlay">
-            <h1 class="card-title text-center " style="color: yellow;">RECYCON SHOP</h1>
-{{--            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>--}}
-{{--            <p class="card-text">Last updated 3 mins ago</p>--}}
-        </div>
+    <div class="overflow-hidden picturebox p-3 opacitypic position-relative">
+        <h1 class="position-absolute top-50 start-50 fw-bold">RECYCON SHOP</h1>
+        <img width="100%"src="https://c1.wallpaperflare.com/preview/173/122/573/trash-empty-recycle-recycling.jpg" alt="">
+    </div>
+    <div class="setheight pt-3 mb-5">
+        <h1 class="text-center colortext">ABOUT US</h1>
+        <h3 class="bordertext text-center w-75 mx-auto mt-5 p-5">We Are a shop for buying recycle things and second hand thing</h3>
     </div>
 
-    <div class="setheigh">
-        <h1 class="d-flex justify-content-center">About Us</h1>
-        <h3 class="border border-dark text-center w-75 mx-auto mt-5">We Are a shop for buying recycle things and second hand thing</h3>
-    </div>
+    <style>
+        .colortext{
+            color: green;
+        }
+        .position-absolute{
+            transform: translate(-45%,-45%);
+            color: yellow;
+        }
+        .picturebox{
+            max-height: 88vh;
+        }
 
-@stop
+        .opacitypic::before{
+            content: '';
+            width: 98%;
+            height: 100%;
+            background-color: black;
+            position: absolute;
+            opacity: 0.3;
+        }
+        .setheight{
+            min-height: 30vh;
+        }
 
-@extends('header')
+        .bordertext{
+            border: 3px dashed black;
+        }
+    </style>
+@endsection
+
+
 
