@@ -11,47 +11,70 @@
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
-        <div class="container">
+    <nav class=" navbar navbar-expand-lg bg-dark navbar-dark">
+        <div class="container-fluid">
             <div>
-                <a class="navbar-brand" href="#">Recycon</a>
+                <a class="navbar-brand " href="#">Recycon</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
             </div>
 
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Home</a>
-                    </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link" href="#">Link</a>
-                                            </li>
-                                            <li class="nav-item dropdown">
-                                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    Dropdown
-                                                </a>
-                                                <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item" href="#">Action</a></li>
-                                                    <li><a class="dropdown-item" href="#">Another action</a></li>
-                                                    <li><hr class="dropdown-divider"></li>
-                                                    <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                                </ul>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a class="nav-link disabled">Disabled</a>
-                                            </li>
+            <div class="collapse navbar-collapse d-flex justify-content-between" id="navbarSupportedContent">
+                    <div class="">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="#">Show Product</a>
+                            </li>
+                            @if(\Illuminate\Support\Facades\Auth::user()->role == 'admin')
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Manage Item
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#">Action</a></li>
+                                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                    </ul>
+                                </li>
+                            @elseif (\Illuminate\Support\Facades\Auth::user()->role == 'user')
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="#">My Cart</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="#">Transaction History</a>
+                                </li>
+                            @endif
+                        </ul>
+                    </div>
+                    <div>
+                        <form class="d-flex" role="search">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" width="50%">
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        </form>
+                    </div>
+                    <div class="d-flex align-items-center ">
+                        @if(\Illuminate\Support\Facades\Auth::user())
+                            <li class="nav-item dropdown me-4">
+                                <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Profile
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">Hi {{\Illuminate\Support\Facades\Auth::user()->name}}</a></li>
+                                    <li><a class="dropdown-item" href="#">Edit Profile</a></li>
+                                    <li><a class="dropdown-item" href="#">Change Password</a></li>
+                                </ul>
+                            </li>
+                            <a href="/logout"><button class="btn btn-outline-info" type="submit">Logout</button></a>
+                        @else
+                            <div>
+                                <a href="/login"><button class="btn btn-outline-info me-2" type="submit">Login</button></a>
+                                <a href="/register"><button class="btn btn-outline-info" type="submit">Register</button></a>
+                            </div>
 
-                </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
-                <div>
-                    <button class="btn btn-outline-info me-2" type="submit">Login</button>
-                    <button class="btn btn-outline-info" type="submit">Register</button>
-                </div>
+                        @endif
+                    </div>
             </div>
 
 
