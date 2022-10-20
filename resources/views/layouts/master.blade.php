@@ -11,7 +11,7 @@
 </head>
 <body>
 <header>
-    <nav class=" navbar navbar-expand-lg bg-dark navbar-dark">
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
         <div class="container-fluid">
             <div>
                 <a class="navbar-brand " href="#">Recycon</a>
@@ -24,10 +24,42 @@
                     <div class="">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Show Product</a>
+                                <a class="nav-link active" aria-current="page" href="/showproduct">Show Product</a>
                             </li>
-                            @if(\Illuminate\Support\Facades\Auth::user()->role == 'admin')
-                                <li class="nav-item dropdown">
+                           @auth()
+                                @if(\Illuminate\Support\Facades\Auth::user()->role == 'Admin')
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Manage Item
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" href="#">Action</a></li>
+                                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                        </ul>
+                                    </li>
+                                @elseif (\Illuminate\Support\Facades\Auth::user()->role == 'User')
+                                    <li class="nav-item">
+                                        <a class="nav-link active" aria-current="page" href="#">My Cart</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link active" aria-current="page" href="#">Transaction History</a>
+                                    </li>
+                                @endif
+                            @endauth
+                        </ul>
+                    </div>
+                    <div>
+                        <form class="d-flex" role="search">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" width="50%">
+                            <button class="btn btn-outline-success" type="submit">Search</button>
+                        </form>
+                    </div>
+                    <div class="">
+                        @Auth()
+                            <div class=" d-flex align-items-center">
+                                <li class="nav-item dropdown text-white list-unstyled me-4">
                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                         Manage Item
                                     </a>
@@ -38,35 +70,9 @@
                                         <li><a class="dropdown-item" href="#">Something else here</a></li>
                                     </ul>
                                 </li>
-                            @elseif (\Illuminate\Support\Facades\Auth::user()->role == 'user')
-                                <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="#">My Cart</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link active" aria-current="page" href="#">Transaction History</a>
-                                </li>
-                            @endif
-                        </ul>
-                    </div>
-                    <div>
-                        <form class="d-flex" role="search">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" width="50%">
-                            <button class="btn btn-outline-success" type="submit">Search</button>
-                        </form>
-                    </div>
-                    <div class="d-flex align-items-center ">
-                        @if(\Illuminate\Support\Facades\Auth::user())
-                            <li class="nav-item dropdown me-4">
-                                <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Profile
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Hi {{\Illuminate\Support\Facades\Auth::user()->name}}</a></li>
-                                    <li><a class="dropdown-item" href="#">Edit Profile</a></li>
-                                    <li><a class="dropdown-item" href="#">Change Password</a></li>
-                                </ul>
-                            </li>
-                            <a href="/logout"><button class="btn btn-outline-info" type="submit">Logout</button></a>
+                                <a href="/logout"><button class="btn btn-outline-info" type="submit">Logout</button></a>
+                            </div>
+
                         @else
                             <div>
                                 <a href="/login"><button class="btn btn-outline-info me-2" type="submit">Login</button></a>
@@ -91,6 +97,5 @@
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js" integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk" crossorigin="anonymous"></script>
-
 </body>
 </html>

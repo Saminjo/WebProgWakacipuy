@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use \App\Http\Controllers\AuthController;
+use \App\Http\Controllers\ProductController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,17 +15,16 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('items');
+    return view('home');
 });
 
-Route::get('/changepassword', function () {
-    return view('change_password');
-});
+Route::get('/login', [AuthController::class, 'loginpage']);
+Route::post('/login', [AuthController::class, 'loginform']);
 
-Route::get('/edit_profile', function () {
-    return view('edit_profile');
-});
+Route::get('/register',[AuthController::class,'registerpage']);
+Route::post('/register',[AuthController::class,'registerform']);
 
-Route::get('/login', function () {
-    return view('auth.login');
-});
+Route::get('/logout',[AuthController::class,'logout']);
+Route::get('/showproduct',[ProductController::class,'index']);
+
+
