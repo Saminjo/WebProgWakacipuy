@@ -28,8 +28,9 @@
                 </div>
             @endif
             <div class="d-flex justify-content-center pt-4">
-                <button type="submit" class="link btn btn-primary">Register Now</button>
+                <button type="submit" class="link btn btn-primary mb-3">Register Now</button>
             </div>
+            <p>Already have acount ? <a href="/login" style="color: lightgreen;">Login here</a></p>
         </form>
     </div>
 
@@ -62,7 +63,7 @@
         }
 
         .error-message h1{
-            color: red;
+            color: #ff6629;
             font-size: 1rem;
         }
 

@@ -20,12 +20,18 @@
                         <input type="password" class="form-control" name="password" id="exampleInputPassword1">
                     </div>
                     <div class="mb-3 form-check">
-                        <input type="checkbox" name="remember-me" class="form-check-input" id="exampleCheck1">
+                        <input type="checkbox" name="remember" class="form-check-input" id="exampleCheck1">
                         <label class="form-check-label" for="exampleCheck1">Remember Me</label>
                     </div>
                     <button type="submit" class="btn btn-primary justify-content-center w-100">Login</button>
 
-                    <p class="text-center pt-5">Don't have an account? <button type="submit" class="btn btn-outline-success">Create New</button></p>
+                    @if($errors->any())
+                        <div class="alert alert-danger mt-3" role="alert">
+                            <h6>{{$errors->first()}}</h6>
+                        </div>
+                    @endif
+
+                    <p class="text-center pt-5">Don't have an account? <a href="/register">Create New</a></p>
                 </form>
             </div>
         </div>

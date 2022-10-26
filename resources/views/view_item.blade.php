@@ -15,42 +15,51 @@
         </tr>
         </thead>
         <tbody>
+        @foreach($products as $product)
         <tr>
-            <th scope="row">1</th>
-            <td>Image</td>
-            <td>barang</td>
-            <td>pastinya bermanfaat</td>
-            <td>5000</td>
-            <td>serba bisa</td>
+            <th scope="row">{{$product->id}}</th>
+            <td><img src="{{$product->Image}}" class="card-img-top h-75" alt="..."></td>
+            <td>{{$product->Name}}</td>
+            <td>{{$product->Description}}</td>
+            <td>{{$product->Price}}</td>
+            <td>{{$product->Category}}</td>
             <td>
-                <button type="button" class="btn btn-warning">Update</button>
-                <button type="button" class="btn btn-danger">Delete</button>
+                <form action="/update/{{$product->id}}" method="post">
+                    @csrf
+                    <button type="submit" class="btn btn-warning">Update</button>
+                </form>
+
+                <form action="/delete/{{$product->id}}" method="post">
+                    @csrf
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
             </td>
         </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Image</td>
-            <td>barang1</td>
-            <td>pastinya berguna</td>
-            <td>6000</td>
-            <td>serba bisa</td>
-            <td>
-                <button type="button" class="btn btn-warning">Update</button>
-                <button type="button" class="btn btn-danger">Delete</button>
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>Image</td>
-            <td>barang3</td>
-            <td>pastinya kepake</td>
-            <td>7000</td>
-            <td>serba bisa</td>
-            <td>
-                <button type="button" class="btn btn-warning">Update</button>
-                <button type="button" class="btn btn-danger">Delete</button>
-            </td>
-        </tr>
+        @endforeach
+{{--        <tr>--}}
+{{--            <th scope="row">2</th>--}}
+{{--            <td>Image</td>--}}
+{{--            <td>barang1</td>--}}
+{{--            <td>pastinya berguna</td>--}}
+{{--            <td>6000</td>--}}
+{{--            <td>serba bisa</td>--}}
+{{--            <td>--}}
+{{--                <button type="button" class="btn btn-warning">Update</button>--}}
+{{--                <button type="button" class="btn btn-danger">Delete</button>--}}
+{{--            </td>--}}
+{{--        </tr>--}}
+{{--        <tr>--}}
+{{--            <th scope="row">3</th>--}}
+{{--            <td>Image</td>--}}
+{{--            <td>barang3</td>--}}
+{{--            <td>pastinya kepake</td>--}}
+{{--            <td>7000</td>--}}
+{{--            <td>serba bisa</td>--}}
+{{--            <td>--}}
+{{--                <button type="button" class="btn btn-warning">Update</button>--}}
+{{--                <button type="button" class="btn btn-danger">Delete</button>--}}
+{{--            </td>--}}
+{{--        </tr>--}}
         </tbody>
     </table>
 @endsection
