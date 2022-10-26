@@ -23,9 +23,57 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function viewProduct()
     {
-        //
+        $products = Product::all();
+        return view('view_item')->with('products',$products);
+    }
+
+    public function insertPage()
+    {
+//        $product = Product::find($id);
+        return view('aitems');
+    }
+
+    public function insertProduct(Request $req)
+    {
+        $product = new Product();
+//        $product = Product::where('id',$req->id)->get();
+        $product->Name = $req->name;
+        $product->Price = $req->price;
+        $product->Description = $req->desc;
+        $product->Category = $req->cate;
+        $product->Image = $req->file;
+        $product->save();
+
+        return redirect('/view/product');
+    }
+
+    public function updatePage($id)
+    {
+        $product = Product::find($id);
+        return view('uitems')->with('product',$product);
+    }
+
+    public function updateProduct(Request $req)
+    {
+        $product = Product::find($req->id);
+//        $product = Product::where('id',$req->id)->get();
+        $product->Name = $req->name;
+        $product->Price = $req->price;
+        $product->Description = $req->desc;
+        $product->Category = $req->cate;
+        $product->Image = $req->file;
+        $product->save();
+
+        return redirect('/view/product');
+    }
+
+    public function deleteProduct($id)
+    {
+        $products = Product::find($id);
+        $product->delete();
+        return redirect('/view/product');
     }
 
     /**

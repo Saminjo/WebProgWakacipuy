@@ -20,10 +20,18 @@ class AuthController extends Controller
     }
 
     public function loginform(Request  $request){
-        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
+        $validate = Validator::make($request->all(),[
+            'email' => 'required|unique:users,email',
+            'password' => 'required',
+        ]);
+
+        if($validate->fails()){
+            return redirect()->back()->withErrors($validate);
+        }
+
+        if(Auth::attempt(['email' => $request->email, 'password' => $request->password],$request->remember)){
             return redirect('/');
         }
-        return 'fail';
     }
 
     public function registerpage()
