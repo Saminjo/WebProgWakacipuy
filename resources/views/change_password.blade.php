@@ -5,10 +5,6 @@
     <div class="row justify-content-center ms-5 mt-5 mb-5">
         <div class="col-md-9">
             <form action="/change/password" method="post" class="row g-3 needs-validation" novalidate>
-{{--                <div class="col-sm-14 mb-3">--}}
-{{--                    <label for="validationCustom01" class="form-label">Old Password</label>--}}
-{{--                    <input type="text" class="form-control" name="opass">--}}
-{{--                </div>--}}
                 @csrf
 
                 <input type="hidden" name="id" value="{{$user->id}}">

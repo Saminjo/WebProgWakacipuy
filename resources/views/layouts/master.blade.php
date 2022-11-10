@@ -24,7 +24,7 @@
                     <div class="">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="/showproduct">Show Product</a>
+                                <a class="nav-link active" aria-current="page" href="/show/product">Show Product</a>
                             </li>
                            @auth()
                                 @if(\Illuminate\Support\Facades\Auth::user()->role == 'Admin')
@@ -33,18 +33,18 @@
                                             Manage Item
                                         </a>
                                         <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="#">Action</a></li>
-                                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                                            <li><hr class="dropdown-divider"></li>
-                                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                            <li><a class="dropdown-item" href="/insert">Insert</a></li>
+                                            <li><a class="dropdown-item" href="/view/product">View Product</a></li>
+{{--                                            <li><hr class="dropdown-divider"></li>--}}
+{{--                                            <li><a class="dropdown-item" href="#">Something else here</a></li>--}}
                                         </ul>
                                     </li>
                                 @elseif (\Illuminate\Support\Facades\Auth::user()->role == 'User')
                                     <li class="nav-item">
-                                        <a class="nav-link active" aria-current="page" href="#">My Cart</a>
+                                        <a class="nav-link active" aria-current="page" href="/view/cart">My Cart</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link active" aria-current="page" href="#">Transaction History</a>
+                                        <a class="nav-link active" aria-current="page" href="/transaction/history">Transaction History</a>
                                     </li>
                                 @endif
                             @endauth
@@ -61,13 +61,13 @@
                             <div class=" d-flex align-items-center">
                                 <li class="nav-item dropdown text-white list-unstyled me-4">
                                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Manage Item
+                                        Profile
                                     </a>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="#">Action</a></li>
-                                        <li><a class="dropdown-item" href="#">Another action</a></li>
-                                        <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                        <li><a class="dropdown-item" href="/edit/profile">Edit Profiles</a></li>
+                                        <li><a class="dropdown-item" href="/change/password">Edit Password</a></li>
+{{--                                        <li><hr class="dropdown-divider"></li>--}}
+{{--                                        <li><a class="dropdown-item" href="#">Something else here</a></li>--}}
                                     </ul>
                                 </li>
                                 <a href="/logout"><button class="btn btn-outline-info" type="submit">Logout</button></a>

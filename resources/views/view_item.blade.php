@@ -18,7 +18,7 @@
         @foreach($products as $product)
         <tr>
             <th scope="row">{{$product->id}}</th>
-            <td><img src="{{$product->Image}}" class="card-img-top h-75" alt="..."></td>
+            <td><img src="{{$product->Image}}" class="card-img-top" width="200px" height="200px" alt="..."></td>
             <td>{{$product->Name}}</td>
             <td>{{$product->Description}}</td>
             <td>{{$product->Price}}</td>
@@ -31,7 +31,7 @@
 
                 <form action="/delete/{{$product->id}}" method="post">
                     @csrf
-                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <button type="submit" class="btn btn-danger mt-2">Delete</button>
                 </form>
             </td>
         </tr>

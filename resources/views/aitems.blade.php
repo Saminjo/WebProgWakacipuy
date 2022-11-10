@@ -34,12 +34,20 @@
 
                 <div class="col-md-14 mb-2">
                     <label for="formFile" class="form-label">Default file input example</label>
-                    <input class="form-control" type="text" name="file" ">
+                    <input class="form-control" type="text" name="file" >
                 </div>
 
                 <div class="col-7">
                     <button class="btn btn-primary" type="submit">Save</button>
                 </div>
+
+                @if($errors->any())
+                    @foreach($errors->all() as $err)
+                <div class="alert alert-danger" role="alert">
+                    {{$err}}
+                </div>
+                    @endforeach
+                @endif
             </form>
         </div>
     </div>

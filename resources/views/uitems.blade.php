@@ -4,7 +4,7 @@
 @section('content')
     <div class="row justify-content-center ms-5 mt-5 mb-5">
         <div class="col-md-9">
-            <form action="/update/item" method="post" enctype="multipart/form-data" class="row g-3 needs-validation">
+            <form action="/product/update" method="post" enctype="multipart/form-data" class="row g-3 needs-validation">
                 @csrf
 
                 <input type="hidden" name="id" value="{{$product->id}}">
@@ -45,6 +45,14 @@
                 <div class="col-7">
                     <button class="btn btn-primary" type="submit">Save</button>
                 </div>
+
+                @if($errors->any())
+                    @foreach($errors->all() as $err)
+                        <div class="alert alert-danger" role="alert">
+                            {{$err}}
+                        </div>
+                    @endforeach
+                @endif
             </form>
         </div>
     </div>
