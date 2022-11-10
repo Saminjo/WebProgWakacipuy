@@ -27,24 +27,17 @@ Route::get('/register',[AuthController::class,'registerpage']);
 Route::post('/register',[AuthController::class,'registerform']);
 
 //logout
-Route::get('/logout',[AuthController::class,'logout']);
+Route::get('/logout',[AuthController::class,'logout'])->middleware('security');
 
 //show product
-Route::get('/show/product',[ProductController::class,'index'])->middleware('security');;
+Route::get('/show/product',[ProductController::class,'index']);
 
 //view product
-Route::get('/view/product',[ProductController::class,'viewProduct'])->middleware('security');
+Route::get('/view/product',[ProductController::class,'viewProduct']);
 
-//insert
-Route::get('/insert',[ProductController::class,'insertPage'])->middleware('security');
-Route::post('/insert',[ProductController::class,'insertProduct'])->middleware('security');
-
-//update
-Route::post('/update/{id}',[ProductController::class,'updatePage'])->middleware('security');
-Route::post('/update/item',[ProductController::class,'updateProduct'])->middleware('security');
-
-//delete
-Route::post('/delete/{id}',[ProductController::class,'deleteProduct'])->middleware('security');
+//detail product
+Route::get('/product/detail/{id}',[ProductController::class,'detailproductpage']);
+Route::post('/product/detail',[ProductController::class,'detailproductget']);
 
 //edit profile
 Route::get('/edit/profile',[UserController::class,'editProfile'])->middleware('security');
@@ -53,3 +46,21 @@ Route::post('/edit/profile',[UserController::class,'edit'])->middleware('securit
 //change password
 Route::get('/change/password',[UserController::class,'changePassword'])->middleware('security');
 Route::post('/change/password',[UserController::class,'change'])->middleware('security');
+
+//insert
+Route::get('/insert',[ProductController::class,'insertPage'])->middleware('securityAdmin');
+Route::post('/insert',[ProductController::class,'insertProduct'])->middleware('securityAdmin');
+
+//update
+Route::post('/update/{id}',[ProductController::class,'updatePage'])->middleware('securityAdmin');
+Route::post('/product/update',[ProductController::class,'updateProduct'])->middleware('securityAdmin');
+
+//delete
+Route::post('/delete/{id}',[ProductController::class,'deleteProduct'])->middleware('securityAdmin');
+
+//cart
+Route::get('/view/cart',[ProductController::class,'ViewCart'])->middleware('securityUser');
+Route::post('/cart',[ProductController::class,'Cart'])->middleware('securityUser');
+
+//transaction
+Route::get('/transaction/history',[ProductController::class,'Transaction'])->middleware('securityUser');
