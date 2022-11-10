@@ -2,27 +2,47 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Product;
+use App\Models\TransactionDetail;
+use App\Models\TransactionHeader;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        $products = Product::paginate(3);
+        $products = Product::simplePaginate(3);
         return view('showproduct',compact('products'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function detailproductpage($id){
+        $product = Product::find($id);
+        return view('view_detail',compact('product'));
+    }
+
+    public function detailproductget(Request $request){
+        $user = Auth::user();
+        $check = Cart::where([
+            ['user_id','=',$user->id],
+            ['product_id','=',$request->id]
+        ]);
+        if($check->count() > 0){
+            $check->update(['quantity' => $check->first()->quantity + $request->currstock]);
+        }else{
+            $cart = new Cart();
+            $cart->user_id = $user->id;
+            $cart->product_id = $request->id;
+            $cart->quantity = $request->currstock;
+            $cart->save();
+        }
+
+        return redirect()->back();
+    }
+
     public function viewProduct()
     {
         $products = Product::all();
@@ -31,14 +51,28 @@ class ProductController extends Controller
 
     public function insertPage()
     {
-//        $product = Product::find($id);
+
         return view('aitems');
     }
 
     public function insertProduct(Request $req)
     {
+        $rule = [
+            'name' => 'required|unique:products|max:20',
+            'price' => 'required|numeric|min:1000',
+            'desc' => 'required|max:200',
+            'cate' => 'required|required_with:Recycle,Second',
+            'file' => 'required'
+        ];
+
+        $validate = Validator::make($req->all(),$rule);
+
+        if($validate->fails()){
+            return redirect()->back()->withErrors($validate);
+        }
+
         $product = new Product();
-//        $product = Product::where('id',$req->id)->get();
+
         $product->Name = $req->name;
         $product->Price = $req->price;
         $product->Description = $req->desc;
@@ -57,8 +91,22 @@ class ProductController extends Controller
 
     public function updateProduct(Request $req)
     {
+
+        $rule = [
+            'name' => 'required|unique:products|max:20',
+            'price' => 'required|numeric|min:1000',
+            'desc' => 'required|max:200',
+            'cate' => 'required|required_with:Recycle,Second',
+            'file' => 'required'
+        ];
+
+        $validate = Validator::make($req->all(),$rule);
+
+        if($validate->fails()){
+            return redirect()->back()->withErrors($validate);
+        }
+
         $product = Product::find($req->id);
-//        $product = Product::where('id',$req->id)->get();
         $product->Name = $req->name;
         $product->Price = $req->price;
         $product->Description = $req->desc;
@@ -72,63 +120,57 @@ class ProductController extends Controller
     public function deleteProduct($id)
     {
         $products = Product::find($id);
-        $product->delete();
+        $products->delete();
         return redirect('/view/product');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function ViewCart()
     {
-        //
+        $id = Auth::user()->id;
+        $data = Cart::where('user_id',$id)->get();
+//        dd($data->product);
+        $total = 0;
+        foreach ($data as $d){
+            $total += $d->product->Price * $d->quantity;
+        }
+        return view('cart',compact('data','total'));
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Product $product)
+    public function Cart(Request $req)
     {
-        //
+
+
+        $header = new TransactionHeader();
+        $header->user_id = Auth::user()->id;
+        $header->quantity = 0;
+        $header->save();
+
+        $h = TransactionHeader::where('user_id',Auth::user()->id)->orderBy('user_id','desc')->first();
+
+        $data = Cart::where('user_id',Auth::user()->id)->get();
+
+        $detail = new TransactionDetail();
+        $detail->transaction_id = $h->id;
+        foreach ($data as $d){
+            $detail->product_id = $d->product->id;
+            $detail->quantity = $d->quantity;
+        }
+        $detail->save();
+
+        Cart::whereNotNull('user_id')->delete();
+
+
+        return redirect('/show/product');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Product $product)
+    public function Transaction()
     {
-        //
-    }
+        $data = TransactionDetail::all();
+        $total = 0;
+        foreach ($data as $d){
+            $total += $d->product->Price * $d->quantity;
+        }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Product $product)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Product $product)
-    {
-        //
+        return view('transaction',compact('data','total'));
     }
 }
