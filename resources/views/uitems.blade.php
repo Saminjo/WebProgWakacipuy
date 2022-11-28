@@ -1,7 +1,8 @@
 @extends('layouts.master')
-@section('title','Home')
+@section('title','Update Item')
 
 @section('content')
+    <div class="container">
     <div class="row justify-content-center ms-5 mt-5 mb-5">
         <div class="col-md-9">
             <form action="/product/update" method="post" enctype="multipart/form-data" class="row g-3 needs-validation">
@@ -55,6 +56,7 @@
                 @endif
             </form>
         </div>
+    </div>
     </div>
 @endsection
 

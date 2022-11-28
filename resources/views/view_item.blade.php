@@ -1,7 +1,8 @@
 @extends('layouts.master')
-@section('title','Home')
+@section('title','View Item')
 
 @section('content')
+
     <table class="table table-dark table-striped mt-3 mb-3">
         <thead>
         <tr>
@@ -18,7 +19,9 @@
         @foreach($products as $product)
         <tr>
             <th scope="row">{{$product->id}}</th>
-            <td><img src="{{$product->Image}}" class="card-img-top" width="200px" height="200px" alt="..."></td>
+            <td>
+                <img src="{{$product->Image}}" class="card-img-top" width="200px" height="200px" alt="...">
+            </td>
             <td>{{$product->Name}}</td>
             <td>{{$product->Description}}</td>
             <td>{{$product->Price}}</td>
@@ -36,30 +39,16 @@
             </td>
         </tr>
         @endforeach
-{{--        <tr>--}}
-{{--            <th scope="row">2</th>--}}
-{{--            <td>Image</td>--}}
-{{--            <td>barang1</td>--}}
-{{--            <td>pastinya berguna</td>--}}
-{{--            <td>6000</td>--}}
-{{--            <td>serba bisa</td>--}}
-{{--            <td>--}}
-{{--                <button type="button" class="btn btn-warning">Update</button>--}}
-{{--                <button type="button" class="btn btn-danger">Delete</button>--}}
-{{--            </td>--}}
-{{--        </tr>--}}
-{{--        <tr>--}}
-{{--            <th scope="row">3</th>--}}
-{{--            <td>Image</td>--}}
-{{--            <td>barang3</td>--}}
-{{--            <td>pastinya kepake</td>--}}
-{{--            <td>7000</td>--}}
-{{--            <td>serba bisa</td>--}}
-{{--            <td>--}}
-{{--                <button type="button" class="btn btn-warning">Update</button>--}}
-{{--                <button type="button" class="btn btn-danger">Delete</button>--}}
-{{--            </td>--}}
-{{--        </tr>--}}
         </tbody>
     </table>
+
+
+    <style>
+        .footer{
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            z-index: 100;
+        }
+    </style>
 @endsection

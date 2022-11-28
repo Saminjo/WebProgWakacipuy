@@ -1,7 +1,8 @@
 @extends('layouts.master')
-@section('title','Home')
+@section('title','Register')
 
 @section('content')
+
     <div class="content min-vh-100 mx-auto d-flex align-items-center justify-content-center">
         <form class="outline" method="post" action="/register">
             @csrf
@@ -33,6 +34,7 @@
             <p>Already have acount ? <a href="/login" style="color: lightgreen;">Login here</a></p>
         </form>
     </div>
+
 
 
     <style>

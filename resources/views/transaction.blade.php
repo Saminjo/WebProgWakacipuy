@@ -2,6 +2,7 @@
 @section('title','Transaction')
 
 @section('content')
+
     <table class="table table-dark table-striped mt-3 mb-3">
         <thead>
         <tr>
@@ -24,8 +25,8 @@
         @endforeach
         <tr>
             <td scope="col">Total Price : {{$total}}</td>
-{{--            <td></td>--}}
         </tr>
         </tbody>
     </table>
+
 @endsection

@@ -1,7 +1,8 @@
 @extends('layouts.master')
-@section('title','Home')
+@section('title','Login')
 
 @section('content')
+
     <div class="background min-vh-100 d-flex align-items-center justify-content-center">
         <div class="d-flex box">
             <div class="overflow-hidden w-50">
@@ -36,6 +37,7 @@
             </div>
         </div>
     </div>
+
 
     <style>
         .background{

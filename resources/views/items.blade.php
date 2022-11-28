@@ -1,7 +1,8 @@
 @extends('layouts.master')
-@section('title','Home')
+@section('title','Items')
 
 @section('content')
+    <div class="container">
     <div class="row justify-content-center ms-5 mt-5 mb-5">
         <div class="col-md-9">
             <form class="row g-3 needs-validation" novalidate>
@@ -40,6 +41,7 @@
                 </div>
             </form>
         </div>
+    </div>
     </div>
 @endsection
 

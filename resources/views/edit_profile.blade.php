@@ -1,7 +1,8 @@
 @extends('layouts.master')
-@section('title','Home')
+@section('title','Edit Profile')
 
 @section('content')
+    <div class="container">
     <div class="row justify-content-center ms-5 mt-5 mb-5">
         <div class="col-md-9">
         <form action="/edit/profile" method="post" class="row g-3 needs-validation" novalidate>
@@ -23,5 +24,15 @@
         </form>
         </div>
     </div>
+    </div>
+
+    <style>
+        .footer{
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            z-index: 100;
+        }
+    </style>
 @endsection
 
