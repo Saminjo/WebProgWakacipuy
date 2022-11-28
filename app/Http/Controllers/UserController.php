@@ -19,7 +19,7 @@ class UserController extends Controller
     public function changePassword()
     {
         $user = User::find(Auth::user()->id);
-        return view('change_password')->with('user',$user);
+        return view('auth.change_password')->with('user',$user);
     }
 
     public function edit(Request $req)

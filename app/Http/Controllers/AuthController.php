@@ -16,10 +16,13 @@ class AuthController extends Controller
      */
     public function loginpage()
     {
+        if(Auth::check()){
+            return redirect()->back();
+        }
         return view('auth.login');
     }
 
-    public function loginform(Request  $request){
+    public function loginform(Request $request){
         $validate = Validator::make($request->all(),[
             'email' => 'required',
             'password' => 'required',
@@ -29,9 +32,10 @@ class AuthController extends Controller
             return redirect()->back()->withErrors($validate);
         }
 
-        if(Auth::attempt(['email' => $request->email, 'password' => $request->password],$request->remember)){
+        if(Auth::attempt(['email' => $request->email, 'password' => $request->password], $request->remember)){
             return redirect('/');
         }
+        return redirect()->back();
     }
 
     public function registerpage()
@@ -41,9 +45,9 @@ class AuthController extends Controller
 
     public function registerform(Request  $request){
         $validate = Validator::make($request->all(),[
-            'name'=> 'required',
+            'name'=> 'required|min:3',
             'email' => 'required|unique:users,email',
-            'password' => 'required',
+            'password' => 'required|min:6',
             'confirm-password' => 'required|same:password'
         ]);
 
