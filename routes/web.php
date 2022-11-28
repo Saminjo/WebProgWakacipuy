@@ -16,7 +16,7 @@ use \App\Http\Controllers\UserController;
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('home.home');
 });
 //login
 Route::get('/login', [AuthController::class, 'loginpage']);
